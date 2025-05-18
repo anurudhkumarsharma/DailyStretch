@@ -62,8 +62,9 @@ export default function StretchAnimation({
   // Show GIF if available, otherwise fallback to SVG
   return (
     <div
-      className={`flex items-center justify-center ${fullScreen ? "w-full h-full" : "w-full aspect-square"}`}
+      className={`flex items-center justify-center overflow-hidden ${fullScreen ? "w-full h-full" : "w-full h-full"}`}
       aria-label={`Animation of ${name} stretch`}
+      style={{ margin: 0, padding: 0 }}
     >
       {hasImage && stretch?.imageSrc ? (
         // Display GIF image
@@ -71,11 +72,11 @@ export default function StretchAnimation({
           <Image 
             src={stretch.imageSrc}
             alt={`${stretch.name} demonstration`}
-            className="object-contain rounded-lg" 
+            className="object-cover rounded-lg" 
             fill={true}
             sizes={fullScreen ? "(max-width: 768px) 100vw, 700px" : "(max-width: 768px) 100vw, 200px"}
             priority={true}
-            style={{objectFit: "fit"}}
+            style={{objectFit: "cover"}}
           />
         </div>
       ) : (

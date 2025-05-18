@@ -92,6 +92,32 @@ const config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        // Stretching animations for the logo
+        stretch: {
+          "0%": { transform: "scaleY(1)" },
+          "50%": { transform: "scaleY(1.1)" },
+          "100%": { transform: "scaleY(1)" },
+        },
+        armStretch: {
+          "0%": { transform: "rotate(0deg)" },
+          "50%": { transform: "rotate(-20deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
+        armStretch2: {
+          "0%": { transform: "rotate(0deg)" },
+          "50%": { transform: "rotate(20deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
+        legStretch: {
+          "0%": { transform: "rotate(0deg)" },
+          "50%": { transform: "rotate(15deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
+        legStretch2: {
+          "0%": { transform: "rotate(0deg)" },
+          "50%": { transform: "rotate(-15deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -99,6 +125,12 @@ const config = {
         "float": "float 4s ease-in-out infinite",
         "pulse": "pulse 3s ease-in-out infinite",
         "shimmer": "shimmer 8s ease-in-out infinite",
+        // Logo stretch animations
+        "stretch": "stretch 2s ease-in-out infinite",
+        "armStretch": "armStretch 2s ease-in-out infinite",
+        "armStretch2": "armStretch2 2s ease-in-out infinite",
+        "legStretch": "legStretch 2s ease-in-out infinite",
+        "legStretch2": "legStretch2 2s ease-in-out infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

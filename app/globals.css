@@ -73,10 +73,35 @@
   body {
     @apply bg-background text-foreground;
     background-image: 
-      radial-gradient(at 100% 0%, hsla(var(--primary)/0.1) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, hsla(var(--primary)/0.1) 0px, transparent 50%);
+      radial-gradient(at 100% 0%, hsla(var(--primary)/0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(var(--primary)/0.15) 0px, transparent 50%);
     background-attachment: fixed;
+    font-feature-settings: "salt" on, "liga" on;
   }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-teal-400 to-blue-500 dark:from-teal-500 dark:to-blue-600 rounded-full;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply from-teal-500 to-blue-600 dark:from-teal-400 dark:to-blue-500;
 }
 
 /* Neumorphic styles */
@@ -90,6 +115,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .neu-card:hover {
@@ -100,11 +126,12 @@
 }
 
 .dark .neu-card {
-  background-color: #1a202c;
+  background-color: rgba(26, 32, 44, 0.8);
   box-shadow: 
     5px 5px 15px rgba(0, 0, 0, 0.4), 
     -5px -5px 15px rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
 }
 
 .dark .neu-card:hover {
@@ -132,10 +159,11 @@
 
 .neu-button {
   border-radius: 0.75rem;
-  background: linear-gradient(to right, #0d9488, #0ea5e9);
+  background: linear-gradient(145deg, #0d9488, #0ea5e9);
   box-shadow: 
     5px 5px 15px rgba(0, 0, 0, 0.08), 
-    -5px -5px 15px rgba(255, 255, 255, 0.8);
+    -5px -5px 15px rgba(255, 255, 255, 0.8),
+    inset 0 0 0 rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -160,23 +188,26 @@
 }
 
 .neu-button:hover {
-  background: linear-gradient(to right, #0f766e, #0284c7);
+  background: linear-gradient(145deg, #0f766e, #0284c7);
   box-shadow: 
     8px 8px 20px rgba(0, 0, 0, 0.1), 
-    -8px -8px 20px rgba(255, 255, 255, 0.8);
+    -8px -8px 20px rgba(255, 255, 255, 0.8),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
   transform: translateY(-3px);
 }
 
 .dark .neu-button {
   box-shadow: 
     5px 5px 15px rgba(0, 0, 0, 0.3), 
-    -5px -5px 15px rgba(255, 255, 255, 0.05);
+    -5px -5px 15px rgba(255, 255, 255, 0.05),
+    inset 0 0 0 rgba(255, 255, 255, 0.1);
 }
 
 .dark .neu-button:hover {
   box-shadow: 
     8px 8px 20px rgba(0, 0, 0, 0.4), 
-    -8px -8px 20px rgba(255, 255, 255, 0.05);
+    -8px -8px 20px rgba(255, 255, 255, 0.05),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 .neu-gradient-text {
@@ -185,6 +216,11 @@
   background-clip: text;
   color: transparent;
   position: relative;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.dark .neu-gradient-text {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Animations */
@@ -221,4 +257,41 @@
 .dark .glass-card {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Progress bars */
+.progress-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+  100% {
+    left: 100%;
+  }
+}
+
+/* Cards and buttons hover effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }

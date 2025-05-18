@@ -76,8 +76,8 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
   return (
     <div className="w-full relative">
       {/* Decorative background elements */}
-      <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-teal-200/30 to-blue-200/30 dark:from-teal-900/20 dark:to-blue-900/20 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-tr from-purple-200/30 to-pink-200/30 dark:from-purple-900/20 dark:to-pink-900/20 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-teal-200/30 to-blue-200/30 dark:from-teal-900/20 dark:to-blue-900/20 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-purple-200/30 to-pink-200/30 dark:from-purple-900/20 dark:to-pink-900/20 rounded-full blur-3xl -z-10"></div>
 
       <Tabs defaultValue="routine" value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-8 neu-card p-2 shadow-neu-light dark:shadow-neu-dark bg-transparent rounded-2xl h-16 overflow-hidden">
@@ -103,16 +103,16 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
 
         <TabsContent value="routine" className="space-y-5">
           {routine.length === 0 ? (
-            <div className="text-center py-16 border-2 border-dashed rounded-xl glass-card transition-all hover:scale-[1.01] relative overflow-hidden group">
+            <div className="text-center py-20 border-2 border-dashed rounded-xl glass-card transition-all hover:scale-[1.01] relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
-              <div className="absolute right-4 top-4 w-20 h-20 bg-teal-400/10 dark:bg-teal-900/10 rounded-full -z-10"></div>
-              <div className="absolute left-4 bottom-4 w-16 h-16 bg-blue-400/10 dark:bg-blue-900/10 rounded-full -z-10"></div>
+              <div className="absolute right-4 top-4 w-24 h-24 bg-teal-400/10 dark:bg-teal-900/10 rounded-full -z-10"></div>
+              <div className="absolute left-4 bottom-4 w-20 h-20 bg-blue-400/10 dark:bg-blue-900/10 rounded-full -z-10"></div>
               
-              <p className="text-muted-foreground mb-2 font-medium">Your routine is empty</p>
-              <p className="text-sm text-muted-foreground/70 mb-8 max-w-md mx-auto">Start building your personalized stretch routine by adding stretches</p>
+              <p className="text-muted-foreground mb-3 font-medium text-lg">Your routine is empty</p>
+              <p className="text-sm text-muted-foreground/70 mb-10 max-w-md mx-auto">Start building your personalized stretch routine by adding stretches</p>
               <button 
                 onClick={() => setActiveTab("stretches")} 
-                className="neu-button px-6 py-3 text-white font-medium rounded-xl relative overflow-hidden group-hover:scale-105 transition-transform"
+                className="neu-button px-8 py-4 text-white font-medium rounded-xl relative overflow-hidden group-hover:scale-105 transition-transform shadow-lg hover-lift group"
               >
                 <span className="relative z-10 flex items-center">
                   <Plus className="inline mr-2 h-5 w-5" /> Add Stretches
@@ -141,9 +141,9 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
             </DndContext>
           )}
 
-          <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800">
+          <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div className="neu-card px-6 py-4 rounded-xl relative overflow-hidden group">
+              <div className="neu-card px-6 py-4 rounded-xl relative overflow-hidden group hover-lift">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
                 <p className="font-medium text-sm text-muted-foreground mb-1 flex items-center">
                   <Clock className="h-4 w-4 mr-2 text-teal-500 dark:text-teal-400" /> Total Time:
@@ -155,10 +155,10 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
               
               <button
                 onClick={() => setActiveTab("stretches")}
-                className="neu-button px-5 py-3 text-white rounded-xl hover:scale-105 transition-all relative overflow-hidden"
+                className="neu-button px-6 py-3.5 text-white rounded-xl hover:scale-105 transition-all relative overflow-hidden hover-lift group"
               >
                 <span className="relative z-10 flex items-center">
-                  <Plus className="inline mr-2 h-5 w-5" /> Add More
+                  <Plus className="inline mr-2 h-5 w-5" /> Add More Stretches
                 </span>
               </button>
             </div>
@@ -174,34 +174,34 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
               return (
                 <div 
                   key={stretch.id} 
-                  className={`neu-card overflow-hidden rounded-xl transition-all ${!isAlreadyAdded ? "hover:scale-[1.02] hover:-translate-y-1" : "opacity-70"} relative group`}
+                  className={`neu-card overflow-hidden rounded-xl transition-all ${!isAlreadyAdded ? "hover:scale-[1.02] hover:-translate-y-1 hover-lift" : "opacity-70"} relative group`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 animate-shimmer"></div>
                   <div className="absolute -right-8 -top-8 w-16 h-16 bg-gradient-to-br from-teal-400/10 to-blue-400/10 dark:from-teal-900/10 dark:to-blue-900/10 rounded-full -z-1 transition-transform group-hover:scale-150"></div>
                   
                   {isAlreadyAdded && (
-                    <div className="absolute right-3 top-3 bg-blue-500 text-white text-xs font-bold rounded-full px-2 py-1 z-10">
-                      Added
+                    <div className="absolute right-3 top-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-bold rounded-full px-2.5 py-1.5 z-10 flex items-center shadow-sm">
+                      <Check className="h-3 w-3 mr-1" /> Added
                     </div>
                   )}
                   
-                  <div className="p-5">
-                    <h3 className="font-bold text-xl font-montserrat">{stretch.name}</h3>
+                  <div className="p-3">
+                    <h3 className="font-bold text-xl font-montserrat text-gray-800 dark:text-gray-100">{stretch.name}</h3>
                   </div>
-                  <div className="p-5 pt-2 relative">
-                    <div className="w-full h-52 mb-3 overflow-hidden rounded-lg p-0">
+                  <div className="px-3 pb-3 relative">
+                    <div className="w-full h-56 mb-3 overflow-hidden rounded-lg p-0 bg-gray-50 dark:bg-gray-800/30 shadow-inner">
                       <StretchAnimation name={stretch.animationName} />
                     </div>
                     <p className="text-sm text-muted-foreground">{stretch.description}</p>
                   </div>
-                  <div className="p-4 border-t border-gray-100 dark:border-gray-800">
+                  <div className="p-3 border-t border-gray-100 dark:border-gray-800">
                     <button 
                       onClick={() => !isAlreadyAdded && addStretchToRoutine(stretch)} 
                       disabled={isAlreadyAdded}
-                      className={`w-full py-3 rounded-xl font-medium relative overflow-hidden ${
+                      className={`w-full py-2.5 rounded-xl font-medium relative overflow-hidden ${
                         isAlreadyAdded 
                           ? "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed" 
-                          : "neu-button text-white"
+                          : "neu-button text-white shadow-md"
                       }`}
                     >
                       <span className="relative z-10 flex items-center justify-center">
