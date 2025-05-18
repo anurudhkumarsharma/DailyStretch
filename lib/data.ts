@@ -27,7 +27,7 @@ export const defaultStretches: Stretch[] = [
   },
   {
     id: "calf",
-    name: "Quadriceps Stretch",
+    name: "Air Squat",
     description: "Stretches your lower legs. Step forward and press your heel down.",
     animationName: "calf",
     duration: 30,

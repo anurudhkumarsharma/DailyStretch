@@ -47,7 +47,7 @@ export default function StretchAnimation({
       back: "bg-teal-500", // Standing Pigeon
       neck: "bg-indigo-500",
       quad: "bg-orange-500",
-      calf: "bg-cyan-500", // Quadriceps Stretch
+      calf: "bg-cyan-500", // Air Squat
       hip: "bg-rose-500", // Standing Fire Hydrant
     }
     return colors[name as keyof typeof colors] || "bg-gray-500"
