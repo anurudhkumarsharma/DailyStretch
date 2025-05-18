@@ -70,6 +70,14 @@
   * {
     @apply border-border;
   }
+  
+  /* Prevent horizontal overflow */
+  html, body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+  }
+  
   body {
     @apply bg-background text-foreground;
     background-image: 

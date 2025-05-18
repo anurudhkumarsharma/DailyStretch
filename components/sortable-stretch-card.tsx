@@ -52,10 +52,13 @@ export default function SortableStretchCard({ stretch, onRemove, onDurationChang
                 <div className="flex items-center gap-2">
                   <Input
                     type="number"
-                    min="5"
+                    min="10"
                     max="300"
                     value={stretch.duration}
-                    onChange={(e) => onDurationChange(Number.parseInt(e.target.value) || 30)}
+                    onChange={(e) => {
+                      const value = Number.parseInt(e.target.value);
+                      onDurationChange(value < 10 ? 10 : value || 30);
+                    }}
                     className="w-20 h-8 shadow-neu-inset-light dark:shadow-neu-inset-dark border-none bg-transparent text-center font-medium"
                     aria-label="Duration in seconds"
                   />

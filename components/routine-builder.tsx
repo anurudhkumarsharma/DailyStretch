@@ -52,7 +52,7 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
     const newStretch = {
       ...stretch,
       id: `${stretch.id}-${Date.now()}`,
-      duration: 30, // Default duration
+      duration: 30, // Default duration (minimum is 10s)
     }
     setRoutine((prevRoutine) => [...prevRoutine, newStretch])
     setActiveTab("routine") // Switch to routine tab after adding
@@ -63,8 +63,11 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
   }
 
   const updateStretchDuration = (id: string, duration: number) => {
+    // Ensure duration is at least 10 seconds
+    const validDuration = Math.max(10, duration);
+    
     setRoutine((prevRoutine) => 
-      prevRoutine.map((stretch) => (stretch.id === id ? { ...stretch, duration } : stretch))
+      prevRoutine.map((stretch) => (stretch.id === id ? { ...stretch, duration: validDuration } : stretch))
     )
   }
 

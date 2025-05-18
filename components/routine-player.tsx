@@ -151,7 +151,12 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
   }
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen w-full p-4 bg-gradient-to-b from-background to-background/80">
+    <div className="relative flex flex-col items-center justify-center min-h-screen w-full p-4 overflow-hidden">
+      {/* Decorative background elements - matching routine-builder.tsx */}
+      <div className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-teal-200/30 to-blue-200/30 dark:from-teal-900/20 dark:to-blue-900/20 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-purple-200/30 to-pink-200/30 dark:from-purple-900/20 dark:to-pink-900/20 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute top-1/3 left-1/4 w-60 h-60 bg-gradient-to-r from-blue-200/20 to-cyan-200/20 dark:from-blue-900/10 dark:to-cyan-900/10 rounded-full blur-3xl -z-10"></div>
+      
       {/* Overall progress */}
       <div className="fixed top-0 left-0 right-0 z-10">
         <Progress value={overallProgress} className="h-1.5 rounded-none bg-gray-200/50 dark:bg-gray-700/50 overflow-hidden relative progress-shine">
@@ -174,15 +179,18 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
 
       <div className="w-full max-w-md mx-auto mt-16 relative">
         {/* Stretch info */}
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-400 dark:to-blue-400">{currentStretch?.name}</h2>
-          <p className="text-muted-foreground mt-1">
+        <div className="text-center mb-6 relative">
+          <div className="absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-teal-300/10 to-blue-300/10 dark:from-teal-700/10 dark:to-blue-700/10 rounded-full blur-xl"></div>
+          <h2 className="text-4xl font-bold font-montserrat bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-400 dark:to-blue-400 drop-shadow-sm">{currentStretch?.name}</h2>
+          <p className="text-muted-foreground mt-2 font-medium">
             Stretch {currentIndex + 1} of {routine.length}
           </p>
         </div>
 
         {/* Animation */}
-        <Card className="mb-6 relative overflow-hidden neu-card max-w-full">
+        <Card className="mb-6 relative overflow-hidden neu-card w-full shadow-xl">
+          <div className="absolute right-0 top-0 w-24 h-24 bg-gradient-to-br from-teal-400/10 to-blue-400/10 dark:from-teal-900/10 dark:to-blue-900/10 rounded-full -z-1 transition-transform"></div>
+          <div className="absolute left-0 bottom-0 w-24 h-24 bg-gradient-to-tr from-purple-400/10 to-pink-400/10 dark:from-purple-900/10 dark:to-pink-900/10 rounded-full -z-1 transition-transform"></div>
           <CardContent className="p-0 w-full">
             {currentStretch?.animationName && 
               <div className="aspect-[4/3] relative">
