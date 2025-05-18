@@ -176,7 +176,7 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
                   <h3 className="font-bold text-xl font-montserrat">{stretch.name}</h3>
                 </div>
                 <div className="p-5 pt-2 relative">
-                  <div className="w-full h-40 mb-3 overflow-hidden rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700">
+                  <div className="w-full h-52 mb-3 overflow-hidden rounded-lg p-0">
                     <StretchAnimation name={stretch.animationName} />
                   </div>
                   <p className="text-sm text-muted-foreground">{stretch.description}</p>

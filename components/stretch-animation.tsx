@@ -44,7 +44,7 @@ export default function StretchAnimation({
       "stretch-forward": "bg-purple-500", // Overhead Reach
       hamstring: "bg-yellow-500",
       shoulder: "bg-pink-500",
-      back: "bg-teal-500", // Standing Pigeon
+      back: "bg-teal-500", // Reverse Lunge
       neck: "bg-indigo-500",
       quad: "bg-orange-500",
       calf: "bg-cyan-500", // Air Squat
@@ -53,22 +53,29 @@ export default function StretchAnimation({
     return colors[name as keyof typeof colors] || "bg-gray-500"
   }
 
+  // For debugging
+  console.log("Animation name:", name);
+  console.log("Has image:", hasImage);
+  console.log("Stretch:", stretch);
+  console.log("Full screen:", fullScreen);
+  
   // Show GIF if available, otherwise fallback to SVG
   return (
     <div
       className={`flex items-center justify-center ${fullScreen ? "w-full h-full" : "w-full aspect-square"}`}
       aria-label={`Animation of ${name} stretch`}
     >
-      {hasImage ? (
+      {hasImage && stretch?.imageSrc ? (
         // Display GIF image
-        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-full">
           <Image 
-            src={stretch!.imageSrc!}
-            alt={`${stretch!.name} demonstration`}
-            className="object-cover rounded-lg" 
+            src={stretch.imageSrc}
+            alt={`${stretch.name} demonstration`}
+            className="object-contain rounded-lg" 
             fill={true}
             sizes={fullScreen ? "(max-width: 768px) 100vw, 700px" : "(max-width: 768px) 100vw, 200px"}
-            priority={fullScreen}
+            priority={true}
+            style={{objectFit: "fit"}}
           />
         </div>
       ) : (

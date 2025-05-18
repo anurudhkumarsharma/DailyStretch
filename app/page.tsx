@@ -121,13 +121,6 @@ export default function Home() {
       {view === "player" && (
         <div className="w-full">
           <RoutinePlayer routine={routine} onExit={() => setView("builder")} />
-          <button
-            onClick={() => setView("builder")}
-            className="fixed bottom-6 left-6 z-50 px-4 py-2 rounded-xl neu-card shadow-neu-light dark:shadow-neu-dark hover:shadow-lg transition-all flex items-center"
-          >
-            <LayoutDashboard className="mr-2 h-5 w-5" />
-            Back to Builder
-          </button>
         </div>
       )}
     </main>

@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/progress"
 import { Card, CardContent } from "@/components/ui/card"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
-import { Play, Pause, SkipForward, SkipBack, X, RotateCcw } from "lucide-react"
+import { Play, Pause, SkipForward, SkipBack, RotateCcw, Home as HomeIcon } from "lucide-react"
 import StretchAnimation from "@/components/stretch-animation"
 import type { Stretch } from "@/lib/types"
 import { cn } from "@/lib/utils"
@@ -26,6 +26,11 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
 
   const timerRef = useRef<NodeJS.Timeout | null>(null)
   const currentStretch = routine[currentIndex]
+  
+  // Log current stretch for debugging
+  useEffect(() => {
+    console.log("Current stretch:", currentStretch)
+  }, [currentStretch])
   const totalDuration = routine.reduce((acc, stretch) => acc + stretch.duration, 0)
   const elapsedDuration =
     routine.slice(0, currentIndex).reduce((acc, stretch) => acc + stretch.duration, 0) +
@@ -41,8 +46,10 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
         setTimeRemaining((prev) => prev - 1)
       }, 1000)
     } else if (timeRemaining === 0) {
-      // Stretch completed
-      setCompletedStretches((prev) => prev + 1)
+      // Stretch completed - only increment if not already counted
+      setCompletedStretches((prev) => 
+        prev < currentIndex + 1 ? currentIndex + 1 : prev
+      )
 
       // Show "Great job!" message
       setShowMessage(true)
@@ -107,16 +114,23 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
 
   const handleNext = () => {
     if (currentIndex < routine.length - 1) {
-      setCurrentIndex((prev) => prev + 1)
-      setTimeRemaining(routine[currentIndex + 1].duration)
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex)
+      setTimeRemaining(routine[nextIndex].duration)
       setIsPlaying(true)
+      
+      // Update completed count when going forward
+      setCompletedStretches(prev => 
+        Math.max(prev, nextIndex)
+      );
     }
   }
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1)
-      setTimeRemaining(routine[currentIndex - 1].duration)
+      const prevIndex = currentIndex - 1;
+      setCurrentIndex(prevIndex)
+      setTimeRemaining(routine[prevIndex].duration)
       setIsPlaying(true)
     }
   }
@@ -126,6 +140,7 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
     setTimeRemaining(routine[0].duration)
     setIsPlaying(false)
     setCompletedStretches(0)
+    setShowMessage(false)
   }
 
   // Format time as MM:SS
@@ -136,7 +151,7 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen w-full p-4">
+    <div className="relative flex flex-col items-center justify-center min-h-screen w-full p-4">
       {/* Overall progress */}
       <div className="fixed top-0 left-0 right-0 z-10">
         <Progress value={overallProgress} className="h-1 rounded-none bg-gray-200 dark:bg-gray-700">
@@ -147,18 +162,17 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
         </Progress>
       </div>
 
-      {/* Exit button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="fixed top-2 right-2 z-20"
+      {/* Back button */}
+      <div
         onClick={onExit}
-        aria-label="Exit routine"
+        className="absolute top-4 left-4 z-20 px-4 py-2 rounded-xl neu-card shadow-neu-light dark:shadow-neu-dark hover:shadow-lg transition-all flex items-center cursor-pointer"
+        style={{ position: 'absolute', top: '16px', left: '16px' }}
       >
-        <X className="h-5 w-5" />
-      </Button>
+        <HomeIcon className="mr-2 h-5 w-5" />
+        Back
+      </div>
 
-      <div className="w-full max-w-md mx-auto">
+      <div className="w-full max-w-md mx-auto mt-16">
         {/* Stretch info */}
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold">{currentStretch?.name}</h2>
@@ -168,18 +182,37 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
         </div>
 
         {/* Animation */}
-        <Card className="mb-6 relative overflow-hidden neu-card">
-          <CardContent className="p-6">
-            <StretchAnimation name={currentStretch?.animationName} isActive={isPlaying} />
+        <Card className="mb-4 relative overflow-hidden neu-card max-w-full">
+          <CardContent className="p-0 w-full">
+            {currentStretch?.animationName && 
+              <div className="aspect-[4/3] relative">
+                <StretchAnimation 
+                  name={currentStretch.animationName} 
+                  isActive={isPlaying} 
+                  fullScreen={true} 
+                />
+              </div>
+            }
 
             {/* "Great job!" message overlay */}
             <div
               className={cn(
-                "absolute inset-0 bg-green-500 bg-opacity-80 flex items-center justify-center transition-opacity duration-300",
-                showMessage ? "opacity-100" : "opacity-0 pointer-events-none",
+                "absolute inset-0 bg-green-500 bg-opacity-80 flex items-center justify-center transition-all duration-300",
+                showMessage ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none",
               )}
             >
-              <h3 className="text-white text-3xl font-bold">Great job!</h3>
+              <div className="text-center">
+                <h3 className="text-white text-3xl font-bold animate-bounce">Great job!</h3>
+                <div className="mt-2 flex justify-center">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <div 
+                      key={i}
+                      className="inline-block mx-1 size-2 rounded-full bg-yellow-300 animate-pulse"
+                      style={{ animationDelay: `${i * 100}ms` }}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -241,8 +274,9 @@ export default function RoutinePlayer({ routine, onExit }: RoutinePlayerProps) {
             <Label htmlFor="auto-advance">Auto-advance to next stretch</Label>
           </div>
 
-          <div className="text-sm text-muted-foreground">
-            {completedStretches}/{routine.length} done
+          <div className="text-sm flex items-center gap-1">
+            <span className="font-medium text-emerald-500 dark:text-emerald-400">{completedStretches}</span>
+            <span className="text-muted-foreground">of {routine.length} completed</span>
           </div>
         </div>
       </div>

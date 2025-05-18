@@ -39,7 +39,7 @@ export default function SortableStretchCard({ stretch, onRemove, onDurationChang
 
         <div className="flex-1 p-5">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700">
+            <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
               <StretchAnimation name={stretch.animationName} />
             </div>
 
