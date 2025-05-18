@@ -4,7 +4,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "hamstring",
     name: "Hamstring Stretch",
-    description: "Stretches the back of your thighs. Sit with legs extended and reach for your toes.",
+    description: "Bend forward at the hips to stretch the back of your thigh.",
     animationName: "hamstring",
     duration: 30,
     imageSrc: "/hamstring-stretch.gif"
@@ -12,7 +12,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "shoulder",
     name: "Shoulder Stretch",
-    description: "Relieves tension in shoulders and upper back. Pull one arm across your chest.",
+    description: "Pull one arm across your chest and hold to stretch the shoulder.",
     animationName: "shoulder",
     duration: 30,
     imageSrc: "/shoulder-stretch.gif"
@@ -20,7 +20,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "quad",
     name: "Quad Stretch",
-    description: "Stretches the front of your thighs. Stand and pull your foot toward your buttocks.",
+    description: "Pull your foot toward your glutes while standing to stretch the front thigh.",
     animationName: "quad",
     duration: 30,
     imageSrc: "/quad-stretch.gif"
@@ -28,7 +28,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "calf",
     name: "Air Squat",
-    description: "Stretches your lower legs. Step forward and press your heel down.",
+    description: "Lower hips back and down while keeping chest up and knees over toes.",
     animationName: "calf",
     duration: 30,
     imageSrc: "/air-squat.gif"
@@ -36,7 +36,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "neck",
     name: "Neck Stretch",
-    description: "Relieves tension in your neck. Gently tilt your head to each side.",
+    description: "Tilt your head sideways gently to stretch the side of the neck.",
     animationName: "neck",
     duration: 30,
     imageSrc: "/neck-stretch.gif"
@@ -44,7 +44,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "back",
     name: "Reverse Lunge",
-    description: "Stretches your lower back. Lie on your back and hug your knees to your chest.",
+    description: "Step one leg back, lower into a lunge, then return to standing.",
     animationName: "back",
     duration: 30,
     imageSrc: "/reverse-lunge.gif"
@@ -52,7 +52,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "hip",
     name: "Standing Fire Hydrant",
-    description: "Opens up your hips. Kneel and lunge forward with one leg.",
+    description: "Lift bent leg sideways while standing to engage glutes.",
     animationName: "hip",
     duration: 30,
     imageSrc: "/standing-fire-hydrant.gif"
@@ -60,7 +60,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "yoga-pose",
     name: "Mountain Climbers",
-    description: "A full-body yoga pose that stretches your hamstrings, calves, and shoulders.",
+    description: "In a plank position, rapidly alternate driving knees to chest.",
     animationName: "yoga-pose",
     duration: 30,
     imageSrc: "/mountain-climbers.gif"
@@ -68,7 +68,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "stretch-side",
     name: "Cervical Retraction",
-    description: "Stretches your obliques and intercostal muscles. Reach overhead and lean to one side.",
+    description: "Gently pull head back while keeping chin level to align spine.",
     animationName: "stretch-side",
     duration: 30,
     imageSrc: "/cervical-retraction.gif"
@@ -76,7 +76,7 @@ export const defaultStretches: Stretch[] = [
   {
     id: "stretch-forward",
     name: "Overhead Reach",
-    description: "Stretches your entire posterior chain. Stand and bend forward at the hips.",
+    description: "Raise both arms overhead and reach upward to stretch torso and shoulders.",
     animationName: "stretch-forward",
     duration: 30,
     imageSrc: "/overhead-reach.gif"

@@ -53,7 +53,7 @@ export default function WelcomeScreen({ onStart, isFirstVisit }: WelcomeScreenPr
 
           <button 
             onClick={onStart} 
-            className="text-lg px-10 py-7 neu-button text-white font-medium rounded-2xl transform transition-all hover:scale-105 shadow-lg"
+            className="text-lg px-10 py-5 neu-button text-white font-medium rounded-2xl transform transition-all hover:scale-105 shadow-lg"
           >
             Build Your Routine <ArrowRight className="inline ml-2" />
           </button>

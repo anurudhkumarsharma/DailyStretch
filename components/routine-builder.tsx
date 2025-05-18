@@ -13,7 +13,7 @@ import {
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Plus, Clock, DumbbellIcon, Sparkles } from "lucide-react"
+import { Plus, Clock, DumbbellIcon, Sparkles, Check } from "lucide-react"
 import SortableStretchCard from "@/components/sortable-stretch-card"
 import StretchAnimation from "@/components/stretch-animation"
 import type { Stretch } from "@/lib/types"
@@ -167,29 +167,59 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
 
         <TabsContent value="stretches">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
-            {availableStretches.map((stretch) => (
-              <div key={stretch.id} className="neu-card overflow-hidden rounded-xl transition-all hover:scale-[1.02] hover:-translate-y-1 relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 animate-shimmer"></div>
-                <div className="absolute -right-8 -top-8 w-16 h-16 bg-gradient-to-br from-teal-400/10 to-blue-400/10 dark:from-teal-900/10 dark:to-blue-900/10 rounded-full -z-1 transition-transform group-hover:scale-150"></div>
-                
-                <div className="p-5">
-                  <h3 className="font-bold text-xl font-montserrat">{stretch.name}</h3>
-                </div>
-                <div className="p-5 pt-2 relative">
-                  <div className="w-full h-52 mb-3 overflow-hidden rounded-lg p-0">
-                    <StretchAnimation name={stretch.animationName} />
+            {availableStretches.map((stretch) => {
+              // Check if stretch is already in routine by comparing IDs
+              const isAlreadyAdded = routine.some(item => item.id.startsWith(stretch.id));
+              
+              return (
+                <div 
+                  key={stretch.id} 
+                  className={`neu-card overflow-hidden rounded-xl transition-all ${!isAlreadyAdded ? "hover:scale-[1.02] hover:-translate-y-1" : "opacity-70"} relative group`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 animate-shimmer"></div>
+                  <div className="absolute -right-8 -top-8 w-16 h-16 bg-gradient-to-br from-teal-400/10 to-blue-400/10 dark:from-teal-900/10 dark:to-blue-900/10 rounded-full -z-1 transition-transform group-hover:scale-150"></div>
+                  
+                  {isAlreadyAdded && (
+                    <div className="absolute right-3 top-3 bg-blue-500 text-white text-xs font-bold rounded-full px-2 py-1 z-10">
+                      Added
+                    </div>
+                  )}
+                  
+                  <div className="p-5">
+                    <h3 className="font-bold text-xl font-montserrat">{stretch.name}</h3>
                   </div>
-                  <p className="text-sm text-muted-foreground">{stretch.description}</p>
+                  <div className="p-5 pt-2 relative">
+                    <div className="w-full h-52 mb-3 overflow-hidden rounded-lg p-0">
+                      <StretchAnimation name={stretch.animationName} />
+                    </div>
+                    <p className="text-sm text-muted-foreground">{stretch.description}</p>
+                  </div>
+                  <div className="p-4 border-t border-gray-100 dark:border-gray-800">
+                    <button 
+                      onClick={() => !isAlreadyAdded && addStretchToRoutine(stretch)} 
+                      disabled={isAlreadyAdded}
+                      className={`w-full py-3 rounded-xl font-medium relative overflow-hidden ${
+                        isAlreadyAdded 
+                          ? "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed" 
+                          : "neu-button text-white"
+                      }`}
+                    >
+                      <span className="relative z-10 flex items-center justify-center">
+                        {isAlreadyAdded ? (
+                          <>
+                            <Check className="inline mr-2 h-4 w-4" /> Already Added
+                          </>
+                        ) : (
+                          <>
+                            <Plus className="inline mr-2 h-4 w-4" /> Add to Routine
+                          </>
+                        )}
+                      </span>
+                    </button>
+                  </div>
                 </div>
-                <div className="p-4 border-t border-gray-100 dark:border-gray-800">
-                  <button onClick={() => addStretchToRoutine(stretch)} className="w-full neu-button py-3 text-white rounded-xl font-medium relative overflow-hidden">
-                    <span className="relative z-10 flex items-center justify-center">
-                      <Plus className="inline mr-2 h-4 w-4" /> Add to Routine
-                    </span>
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </TabsContent>
       </Tabs>
