@@ -8,9 +8,9 @@
   <p align="center">
     A modern web application to build and follow custom stretching routines
     <br />
-    <a href="#demo">View Demo</a>
+    <a href= https://dailystretch.netlify.app/>View Demo</a>
     ·
-    <a href="https://dailystretch.netlify.app/">Features</a>
+    <a href="#features">Features</a>
     ·
     <a href="#getting-started">Getting Started</a>
   </p>
