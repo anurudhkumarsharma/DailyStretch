@@ -10,7 +10,7 @@
     <br />
     <a href="#demo">View Demo</a>
     ·
-    <a href="#features">Features</a>
+    <a href="https://dailystretch.netlify.app/">Features</a>
     ·
     <a href="#getting-started">Getting Started</a>
   </p>
