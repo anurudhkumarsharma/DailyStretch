@@ -39,16 +39,16 @@ export default function StretchAnimation({
   // Map stretch name to a color (for SVG fallback)
   const getColor = () => {
     const colors = {
-      "yoga-pose": "bg-blue-500",
-      "stretch-side": "bg-green-500",
-      "stretch-forward": "bg-purple-500",
+      "yoga-pose": "bg-blue-500", // Elevated Mountain Climbers
+      "stretch-side": "bg-green-500", // Cervical Retraction
+      "stretch-forward": "bg-purple-500", // Overhead Reach
       hamstring: "bg-yellow-500",
       shoulder: "bg-pink-500",
-      back: "bg-teal-500",
+      back: "bg-teal-500", // Standing Pigeon
       neck: "bg-indigo-500",
       quad: "bg-orange-500",
-      calf: "bg-cyan-500",
-      hip: "bg-rose-500",
+      calf: "bg-cyan-500", // Quadriceps Stretch
+      hip: "bg-rose-500", // Standing Fire Hydrant
     }
     return colors[name as keyof typeof colors] || "bg-gray-500"
   }
