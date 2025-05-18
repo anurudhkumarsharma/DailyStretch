@@ -7,6 +7,7 @@ export const defaultStretches: Stretch[] = [
     description: "Stretches the back of your thighs. Sit with legs extended and reach for your toes.",
     animationName: "hamstring",
     duration: 30,
+    imageSrc: "/hamstring-stretch.gif"
   },
   {
     id: "shoulder",
@@ -14,6 +15,7 @@ export const defaultStretches: Stretch[] = [
     description: "Relieves tension in shoulders and upper back. Pull one arm across your chest.",
     animationName: "shoulder",
     duration: 30,
+    imageSrc: "/shoulder-stretch.gif"
   },
   {
     id: "quad",
@@ -21,6 +23,7 @@ export const defaultStretches: Stretch[] = [
     description: "Stretches the front of your thighs. Stand and pull your foot toward your buttocks.",
     animationName: "quad",
     duration: 30,
+    imageSrc: "/quad-stretch.gif"
   },
   {
     id: "calf",
