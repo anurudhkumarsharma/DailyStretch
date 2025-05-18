@@ -20,7 +20,7 @@ import type { Stretch } from "@/lib/types"
 
 interface RoutineBuilderProps {
   routine: Stretch[]
-  setRoutine: (routine: Stretch[]) => void
+  setRoutine: React.Dispatch<React.SetStateAction<Stretch[]>>
   availableStretches: Stretch[]
 }
 
@@ -38,11 +38,11 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
     const { active, over } = event
 
     if (over && active.id !== over.id) {
-      setRoutine((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id)
-        const newIndex = items.findIndex((item) => item.id === over.id)
-
-        return arrayMove(items, oldIndex, newIndex)
+      setRoutine((currentRoutine) => {
+        const oldIndex = currentRoutine.findIndex((item) => item.id === active.id)
+        const newIndex = currentRoutine.findIndex((item) => item.id === over.id)
+        if (oldIndex === -1 || newIndex === -1) return currentRoutine
+        return arrayMove(currentRoutine, oldIndex, newIndex)
       })
     }
   }
@@ -54,16 +54,18 @@ export default function RoutineBuilder({ routine, setRoutine, availableStretches
       id: `${stretch.id}-${Date.now()}`,
       duration: 30, // Default duration
     }
-    setRoutine([...routine, newStretch])
+    setRoutine((prevRoutine) => [...prevRoutine, newStretch])
     setActiveTab("routine") // Switch to routine tab after adding
   }
 
   const removeStretchFromRoutine = (id: string) => {
-    setRoutine(routine.filter((stretch) => stretch.id !== id))
+    setRoutine((prevRoutine) => prevRoutine.filter((stretch) => stretch.id !== id))
   }
 
   const updateStretchDuration = (id: string, duration: number) => {
-    setRoutine(routine.map((stretch) => (stretch.id === id ? { ...stretch, duration } : stretch)))
+    setRoutine((prevRoutine) => 
+      prevRoutine.map((stretch) => (stretch.id === id ? { ...stretch, duration } : stretch))
+    )
   }
 
   // Calculate total routine time
